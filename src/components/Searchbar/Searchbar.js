@@ -3,14 +3,16 @@ import css from './Searchbar.module.css';
 
 export class Searchbar extends React.Component {
   render() {
+    const { handleInput, handleSubmit } = this.props;
     return (
       <header className={css.searchbar}>
-        <form className={css.searchForm}>
+        <form onSubmit={handleSubmit} className={css.searchForm}>
           <button type="submit" className={css['searchForm-button']}>
             <span className={css['searchForm-button-label']}>Search</span>
           </button>
 
           <input
+            onChange={handleInput}
             className={css['searchForm-input']}
             type="text"
             autoComplete="off"
