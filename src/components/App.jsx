@@ -14,7 +14,7 @@ export class App extends React.Component {
   };
 
   async getURL() {
-    const url = `https://pixabay.com/api/?q=${this.state.search}&page=${this.state.currentPage}&key=13558836-548568db06f41293b437b04a2&image_type=photo&orientation=horizontal&per_page=12`;
+    const url = `https://pixabay.com/api/?q=${this.state.search}&page=${this.state.currentPage}&key=${API_key}&image_type=photo&orientation=horizontal&per_page=12`;
     const response = await axios.get(url);
     this.setState({
       images: response.data.hits,
