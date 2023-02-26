@@ -4,7 +4,6 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
 import { Searchbar } from './Searchbar/Searchbar';
 import { Loader } from './Loader/Loader';
-import { Modal } from './Modal/Modal';
 
 const API_key = '13558836-548568db06f41293b437b04a2';
 

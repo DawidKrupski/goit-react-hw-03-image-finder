@@ -1,6 +1,5 @@
 import React from 'react';
 import css from './ImageGalleryItem.module.css';
-import { Modal } from 'components/Modal/Modal';
 
 export class ImageGalleryItem extends React.Component {
   handleImageClick = () => {
