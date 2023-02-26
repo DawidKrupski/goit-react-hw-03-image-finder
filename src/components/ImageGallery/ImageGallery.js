@@ -52,3 +52,7 @@ export class ImageGallery extends React.Component {
     );
   }
 }
+
+ImageGallery.propTypes = {
+  onClick: PropTypes.func,
+};

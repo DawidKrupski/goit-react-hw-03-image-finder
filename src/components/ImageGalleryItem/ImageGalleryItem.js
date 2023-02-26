@@ -14,7 +14,7 @@ export class ImageGalleryItem extends React.Component {
         <img
           className={css['galleryItem-image']}
           src={webformatURL}
-          alt={tags}
+          alt=""
           loading="lazy"
           onClick={this.handleImageClick}
         />
@@ -27,6 +27,5 @@ ImageGalleryItem.propTypes = {
   onClick: PropTypes.func,
   webformatURL: PropTypes.string,
   id: PropTypes.number,
-  tags: PropTypes.string,
   largeImageURL: PropTypes.string,
 };
