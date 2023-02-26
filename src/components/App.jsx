@@ -4,6 +4,7 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
 import { Searchbar } from './Searchbar/Searchbar';
 import { Loader } from './Loader/Loader';
+import { Modal } from './Modal/Modal';
 
 const API_key = '13558836-548568db06f41293b437b04a2';
 
@@ -19,7 +20,6 @@ export class App extends React.Component {
 
   async getURL() {
     const url = `https://pixabay.com/api/?q=${this.state.search}&page=${this.state.page}&key=${API_key}&image_type=photo&orientation=horizontal&per_page=${this.state.perPage}`;
-    // this.setState({ isLoading: true });
     try {
       const response = await axios.get(url);
       this.setState({
@@ -61,10 +61,6 @@ export class App extends React.Component {
     });
   };
 
-  // async componentDidMount() {
-  //   this.getURL();
-  // }
-
   render() {
     return (
       <>
@@ -75,7 +71,10 @@ export class App extends React.Component {
         <ImageGallery images={this.state.images} />
         {this.state.isLoading ? <Loader /> : null}
         {!this.state.isLoading ? (
-          <Button handleLoadMore={this.handleLoadMore} />
+          <Button
+            handleLoadMore={this.handleLoadMore}
+            images={this.state.images}
+          />
         ) : null}
       </>
     );
