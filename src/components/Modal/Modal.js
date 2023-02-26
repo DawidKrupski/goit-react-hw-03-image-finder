@@ -1,5 +1,5 @@
 import React from 'react';
-import 'basiclightbox/dist/basicLightbox.min.css';
+import PropTypes from 'prop-types';
 import css from './Modal.module.css';
 
 export class Modal extends React.Component {

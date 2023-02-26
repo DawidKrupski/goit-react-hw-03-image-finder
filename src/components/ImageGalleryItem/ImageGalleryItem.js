@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import css from './ImageGalleryItem.module.css';
 
 export class ImageGalleryItem extends React.Component {
   handleImageClick = () => {
-    const { largeImageURL } = this.props;
-    this.props.onClick(largeImageURL);
+    const { largeImageURL, tags } = this.props;
+    this.props.onClick(largeImageURL, tags);
   };
   render() {
     const { id, webformatURL } = this.props;
@@ -13,7 +14,7 @@ export class ImageGalleryItem extends React.Component {
         <img
           className={css['galleryItem-image']}
           src={webformatURL}
-          alt=""
+          alt={tags}
           loading="lazy"
           onClick={this.handleImageClick}
         />
@@ -21,3 +22,11 @@ export class ImageGalleryItem extends React.Component {
     );
   }
 }
+
+ImageGalleryItem.propTypes = {
+  onClick: PropTypes.func,
+  webformatURL: PropTypes.string,
+  id: PropTypes.number,
+  tags: PropTypes.string,
+  largeImageURL: PropTypes.string,
+};
