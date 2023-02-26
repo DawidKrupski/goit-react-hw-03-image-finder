@@ -1,3 +1,7 @@
+.buttons {
+  text-align: center;
+  margin-top: 16px;
+}
 .button {
   padding: 8px 16px;
   border-radius: 2px;
