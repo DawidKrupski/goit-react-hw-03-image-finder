@@ -11,19 +11,19 @@ export class App extends React.Component {
   state = {
     search: '',
     images: [],
-    currentPage: 1,
+    page: 0,
     perPage: 12,
     error: null,
     isLoading: false,
   };
 
   async getURL() {
-    const url = `https://pixabay.com/api/?q=${this.state.search}&page=${this.state.currentPage}&key=${API_key}&image_type=photo&orientation=horizontal&per_page=${this.state.perPage}`;
-    this.setState({ isLoading: true });
+    const url = `https://pixabay.com/api/?q=${this.state.search}&page=${this.state.page}&key=${API_key}&image_type=photo&orientation=horizontal&per_page=${this.state.perPage}`;
+    // this.setState({ isLoading: true });
     try {
       const response = await axios.get(url);
       this.setState({
-        images: response.data.hits,
+        images: [...this.state.images, ...response.data.hits],
       });
     } catch (error) {
       this.setState({
@@ -37,23 +37,20 @@ export class App extends React.Component {
   }
 
   handleSubmit = async evt => {
+    this.setState({ isLoading: true });
     evt.preventDefault();
     await this.setState({
-      currentPage: 1,
+      page: 1,
+      images: [],
     });
     this.getURL();
   };
 
-  handleNextPage = async evt => {
-    await this.setState({
-      currentPage: this.state.currentPage + 1,
-    });
-    this.getURL();
-  };
+  handleLoadMore = async evt => {
+    this.setState({ isLoading: true });
 
-  handlePrevPage = async evt => {
     await this.setState({
-      currentPage: this.state.currentPage - 1,
+      page: this.state.page + 1,
     });
     this.getURL();
   };
@@ -64,19 +61,9 @@ export class App extends React.Component {
     });
   };
 
-  async componentDidMount() {
-    this.getURL();
-  }
-
-  renderImages = () => {
-    if (this.state.isLoading) {
-      return <Loader />;
-    } else if (!this.state.isLoading && this.state.images.length > 0) {
-      return <ImageGallery images={this.state.images} />;
-    } else if (this.state.error && !this.state.isLoading) {
-      return <div>Something went wrong: {this.state.error}</div>;
-    }
-  };
+  // async componentDidMount() {
+  //   this.getURL();
+  // }
 
   render() {
     return (
@@ -85,14 +72,10 @@ export class App extends React.Component {
           handleInput={this.handleInput}
           handleSubmit={this.handleSubmit}
         />
-        {this.renderImages()}
+        <ImageGallery images={this.state.images} />
+        {this.state.isLoading ? <Loader /> : null}
         {!this.state.isLoading ? (
-          <Button
-            currentPage={this.state.currentPage}
-            handleNextPage={this.handleNextPage}
-            handlePrevPage={this.handlePrevPage}
-            perPage={this.state.perPage}
-          />
+          <Button handleLoadMore={this.handleLoadMore} />
         ) : null}
       </>
     );
