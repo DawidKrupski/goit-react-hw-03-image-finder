@@ -1,5 +1,4 @@
 import React from 'react';
-import basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import css from './Modal.module.css';
 
